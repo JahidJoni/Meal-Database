@@ -3,7 +3,7 @@ function showResult(data) {
   result.innerHTML = '';
   data === null ? result.innerHTML = `
     <div class="col-md-12 text-center">
-      <p>There is no search result, try agin!</p>
+      <p class = "searching">There is no search result, try agin!</p>
     </div>
   ` :
   data.forEach(meal => {
@@ -24,7 +24,7 @@ function showResult(data) {
 //Search meal by name
 const info = document.getElementById('info');
 function linkMeals(meal) {
-  result.innerHTML = `<p>Processing...</p>`;
+  result.innerHTML = `<p class = "searching">Processing...</p>`;
   ingredients.innerHTML = ""
   info.innerHTML = ""
   fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`)
