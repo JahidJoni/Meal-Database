@@ -1,9 +1,3 @@
-const form = document.querySelector('form');
-const result = document.getElementById('result');
-const info = document.getElementById('info');
-const ingredients = document.getElementById('ingredients');
-const button = document.getElementById('button');
-
 //Result function
 function showResult(data) {
   result.innerHTML = '';
@@ -28,6 +22,7 @@ function showResult(data) {
 };
 
 //Search meal by name
+const info = document.getElementById('info');
 function linkMeals(meal) {
   result.innerHTML = `<p>Processing...</p>`;
   ingredients.innerHTML = ""
@@ -37,7 +32,7 @@ function linkMeals(meal) {
     .then(data => showResult(data.meals));
 };
 
-function showInfo(data) {
+function forInfo(data) {
   data.forEach(meal => {
     info.innerHTML = `
       <div class="container">
@@ -55,6 +50,7 @@ function showInfo(data) {
   });
 
   // Add the ingredients
+  const ingredients = document.getElementById('ingredients');
   const ul = document.createElement('ul');
   for (let i=1; i<=20; i++) {
     ingredients.innerHTML = '<h3 class ="ingredients-text">Ingredients - </h3>';
@@ -71,7 +67,7 @@ function showInfo(data) {
 function linkMeal(mealId) {
   fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
     .then(response => response.json())
-    .then(data => showInfo(data.meals));
+    .then(data => forInfo(data.meals));
 };
 
 function onClick(event) {
@@ -94,7 +90,12 @@ function forNullValue() {
 }
 
 //Calling the function and add event listener
+const form = document.querySelector('form');
 form.addEventListener('submit', onSubmit);
+
+const result = document.getElementById('result');
 result.addEventListener('click', onClick);
+
+const button = document.getElementById('button');
 button.addEventListener('click', forNullValue);
 //Thank you
